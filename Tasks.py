@@ -95,34 +95,37 @@ match task:
                     print('Ничья, победила дружба!')
                     break
     case 3:
-        with open('Task02.txt', 'r', encoding='utf-8') as text:
-            with open('Write.txt', 'w', encoding='utf-8') as data:
-                some_str = text.readline()
-                str_out = ''
-                count = 1
-                print(some_str)
-                i = 0
-                while i < len(some_str) -1:
-                    # print(some_str[i], end='')
-                    # print(some_str[i - 1])
-                    if some_str[i] == some_str[i + 1]:
-                        count = count + 1
-                    # elif i == int(len(some_str)) - 1:
-                    #     print(f'i = {i}')
-                    #     str_out = str_out + str(count) + some_str[i]
+        with open('Task03.txt', 'r', encoding='utf-8') as text:
+            first_str = text.readline()
+            str_out = ''
+            index = 0
+            count = 1
+            while index < len(first_str) - 1:
+                if first_str[index] == first_str[index + 1]:
+                    count += 1
+                    if index == len(first_str) - 2:
+                        str_out += str(count) + first_str[index]
+                else:
+                    if count == 1:
+                        str_out = str_out + str(count) + first_str[index]
+                        if index == len(first_str) - 2:
+                            if first_str[index] != first_str[index + 1]:
+                                str_out += str(count) + first_str[index + 1]
                     else:
-                        if count == 1:
-                            str_out = str_out + str(count) + some_str[i]
-                        else:
-                            str_out = str_out + str(count) + some_str[i]
-                        count = 1
-                    i += 1
-                print(str_out)
-                print(len(some_str) - 1)
-                print(list(enumerate(some_str)))
-                print(list(enumerate(str_out)))
-                print(int(len(some_str)) - 1)
-
-
-        
+                        str_out += str(count) + first_str[index]
+                    count = 1
+                index += 1    
+        print(first_str)
+        print(str_out)
+        with open('Code.txt', 'w', encoding='utf-8') as code:
+            code.write(str_out)
+        with open('Code.txt', 'r', encoding='utf-8') as wcode:
+            coding = wcode.readline()
+        with open('Write.txt', 'w', encoding='utf-8') as data:
+            result = ''
+            for i in range(0, (len(str_out) - 1), 2):
+                result += coding[i + 1] * int(coding[i])
+            data.write(result)
+        print(coding)
+        print(result)
 
